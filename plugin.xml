@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+           id="cordova-plugin-evigilo-api"
+      version="0.1.11">
+    <name>Cordova evigilo api Plugin</name>
+    <description>Cross-platform plugin for Cordova  to easily use evigilo's api. Available for Android and iOS.</description>
+    <license>MIT</license>
+    <keywords>cordova,phonegap,evigilo</keywords>
+
+    <engines>
+      <engine name="cordova" version=">=3.0.0" />
+    </engines>
+
+    <js-module src="www/EvigiloApi.js" name="EvigiloApi">
+        <clobbers target="evigilo.api" />
+	<clobbers target="Evigilo" />
+    </js-module>
+
+    <!-- android -->
+    <platform name="android">
+	<preference name="INSTANCE"/>
+	<preference name="INIT_URL" default="https://test.cityalert.co.il"/>
+	<preference name="DR_INIT_URL" default=" "/>
+
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="EvigiloApi">
+                <param name="android-package" value="com.evigilo.android.plugin.EvigiloApiPlugin"/>
+            </feature>
+        </config-file>
+	<config-file target="AndroidManifest.xml" parent="/manifest">
+	      <uses-permission android:name="android.permission.INTERNET"/>
+	      <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+	      <uses-permission android:name="android.permission.WAKE_LOCK"/>
+	      <uses-permission android:name="android.permission.VIBRATE"/>
+	</config-file>
+	<config-file target="AndroidManifest.xml" parent="/manifest/application">
+		<meta-data android:name="server_url" android:value="$INIT_URL" />
+	        <meta-data android:name="dr_server_url" android:value="$DR_INIT_URL" />
+	        <meta-data android:name="server_instance_name" android:value="$INSTANCE" />
+		<activity android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale" android:excludeFromRecents="true" android:name="com.evigilo.android.push.AlertDialogActivity" 		android:screenOrientation="portrait" android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
+		<service android:name="com.evigilo.android.push.PushService">
+			<intent-filter>
+		  		<action android:name="com.google.firebase.MESSAGING_EVENT"/>
+			</intent-filter>
+		</service>
+		<service android:name="com.evigilo.android.push.PushInstanceIDListenerService">
+			<intent-filter>
+		  		<action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+			</intent-filter>
+		</service>
+		<service android:exported="false" android:label="@string/app_name" android:name="com.evigilo.android.push.UpdateStatisticService">
+		</service>
+	</config-file>
+    	<framework src="src/android/evigiloApi.gradle" custom="true" type="gradleReference" />
+   	<framework src="me.leolin:ShortcutBadger:1.1.17@aar"/>
+    	<framework src="com.google.firebase:firebase-messaging:11.0.1"/>
+    	<framework src="push.gradle" custom="true" type="gradleReference"/>
+    	<framework src="com.google.android.gms:play-services-location:11.0.1"/>
+
+	<resource-file src="src/android/evigilo-android-sdk.aar" target="libs/evigilo-android-sdk.aar" />
+   	
+        <source-file src="src/android/EvigiloApiPlugin.java" target-dir="src/com/evigilo/android/plugin" />
+        <source-file src="src/android/PluginConstants.java" target-dir="src/com/evigilo/android/plugin" />
+        
+    </platform>
+
+</plugin>

@@ -1,0 +1,26 @@
+{
+  "name": "cordova-plugin-evigilo-api",
+  "description": "Cross-platform plugin for Cordova  to easily use evigilo's api. Available for Android and iOS.",
+  "version": "0.1.11",
+  "cordova": {
+    "id": "cordova-plugin-evigilo-api",
+    "platforms": [
+      "ios",
+      "android"
+    ]
+  },
+  "keywords": [
+    "cordova","phonegap","evigilo"
+  ],
+  "engines": {
+    "cordovaDependencies": {
+      "0.1.11": {
+        "cordova-ios": ">=4.4.0",
+        "cordova-android": ">=6.3.0",
+        "cordova": ">=7.1.0"
+      }
+    }
+  },
+  "author": "Ron Poches",
+  "license": "MIT"
+}
