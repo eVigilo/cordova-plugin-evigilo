@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
         xmlns:android="http://schemas.android.com/apk/res/android"
-           id="cordova-plugin-evigilo-api"
+           id="cordova-plugin-evigilo"
       version="0.1.11">
     <name>Cordova evigilo api Plugin</name>
     <description>Cross-platform plugin for Cordova  to easily use evigilo's api. Available for Android and iOS.</description>
