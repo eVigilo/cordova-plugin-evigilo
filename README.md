@@ -100,7 +100,7 @@ This function should be called either after a login phase for a non anounimous u
 Parameter | Type | Default | Description
 --------- | ---- | ------- | -----------
 `settingObj` | `Object` | `{}` | An object describing representing the settings which we want to activate on the server.
-`success` | `function` | | a success callback for the plugin in case the event was succesfully dispatched.
+`success` | `function` | | a success callback for the plugin in case the account was succesfully updated.
 `failure` | `function` | | a failure callback for the plugin in case of native side error.
 
 
@@ -136,3 +136,36 @@ if(Evigilo && Evigilo.postSettings) {
                     });
           }
 ```
+
+### Evigilo.registerDevice(token, success, failure)
+
+Register the device in the server. Normally this should not be used, only when a token is needed to be removed on the server for disabling push notification for the device.
+
+Parameter | Type | Default | Description
+--------- | ---- | ------- | -----------
+`token` | `Object` | `{}` | the device token or '' if we want to disable push notifications.
+`success` | `function` | | a success callback for the plugin in case the device was succesfully updated.
+`failure` | `function` | | a failure callback for the plugin in case of native side error.
+
+
+### Evigilo.sendFeedback(messageId, feedback, success, failure)
+
+Change user account settings on the evigilo cloud.
+This function should be called either after a login phase for a non anounimous users. or after the device registration is made which is usually at the beginning, since you need the creation of a new account key in the native code is dependent on this.
+
+Parameter | Type | Default | Description
+--------- | ---- | ------- | -----------
+`messageId` | `string` | | Required, The message id which we want to link the feedback to.
+`feedback` | `int` | `{}` | Required, The feedback type. feedback options are available via server content (content id :FEEDBACK)
+`success` | `function` | | a success callback for the plugin in case the account was succesfully updated.
+`failure` | `function` | | a failure callback for the plugin in case of native side error.
+
+
+##### Example
+
+```javascript
+if (Evigilo && Evigilo.sendFeedback) {
+          Evigilo.sendFeedback(messageId, 5, defer.resolve, defer.reject);
+        }
+```
+
