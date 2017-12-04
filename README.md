@@ -34,5 +34,51 @@ Parameter | Type | Default | Description
 `initObj` | `Object` | `{push:{}}` | An object describing relevant options for the plugin.
 `failureCallback` | `function` | `{}` | a failure callback for the plugin in case of native side error.
 
+#### initObj.push
+
+Attribute | Type | Default | Description
+--------- | ---- | ------- | -----------
+`android.smallIcon` | `string` | | Optional. The name of a drawable resource to use as the small-icon. The name should not include the extension.
+`android.iconColor` | `string` | | Optional. Sets the background color of the small icon on Android 5.0 and greater. [Supported Formats](http://developer.android.com/reference/android/graphics/Color.html#parseColor(java.lang.String))
+`android.largeIcon` | `string` | | Optional. The name of a drawable resource to use as the large-icon and will be shown inthe alert popup. The name should not include the extension.
 
 
+### Evigilo.sendEvent(eventObj, success, failure)
+
+Report of an emergency event which will be recieved and handled in the evigilo clous.
+
+Parameter | Type | Default | Description
+--------- | ---- | ------- | -----------
+`eventObj` | `Object` | `{}` | An object describing representing the event which we want to activate on the server.
+`success` | `function` | | a success callback for the plugin in case the event was succesfully dispatched.
+`failure` | `function` | | a failure callback for the plugin in case of native side error.
+
+
+#### eventObj
+
+Attribute | Type | Default | Description
+--------- | ---- | ------- | -----------
+`android.smallIcon` | `string` | | Optional. The name of a drawable resource to use as the small-icon. The name should not include the extension.
+`android.iconColor` | `string` | | Optional. Sets the background color of the small icon on Android 5.0 and greater. [Supported Formats](http://developer.android.com/reference/android/graphics/Color.html#parseColor(java.lang.String))
+`android.largeIcon` | `string` | | Optional. The name of a drawable resource to use as the large-icon and will be shown inthe alert popup. The name should not include the extension.
+
+
+##### Example
+
+```javascript
+if (Evigilo && Evigilo.sendEvent) {
+          var eventObj = {};
+          eventObj.phone = '11111111';
+          eventObj.name = 'evigilo smart';
+          eventObj.message = 'I am in trouble';
+          eventObj.photoPath = panicData.imageUrl;//comming from camera plugin
+          eventObj.soundPath = panicData.soundPath; // coming from media plugin
+          eventObj.reportType = 1; // 1 - for panic , 2 - for observation
+          eventObj.event = 11; // the event type id
+          eventObj.subEvent = 11; // the sub event type id
+          eventObj.messageId = 2; // a push message id to link with the emergency event whicj is reported
+
+          Evigilo.sendEvent(eventObj
+          ,defer.resolve, defer.reject);
+        }
+```
