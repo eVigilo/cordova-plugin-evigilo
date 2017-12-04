@@ -10,7 +10,7 @@ To install from the command line you need to also add the customer unique instan
 ```
 cordova plugin add https://github.com/evigilo/cordova-plugin-evigilo --variable INSTANCE=instanceName 
 ```
-### On premise installation
+### installation for On premise server sites
 If the plugin needs to communicate with an on premise server with custom url 
 then use : 
 
@@ -45,7 +45,7 @@ Attribute | Type | Default | Description
 
 ### Evigilo.sendEvent(eventObj, success, failure)
 
-Report of an emergency event which will be recieved and handled in the evigilo clous.
+Report of an emergency event which will be recieved and handled in the evigilo cloud.
 
 Parameter | Type | Default | Description
 --------- | ---- | ------- | -----------
@@ -88,4 +88,51 @@ if (Evigilo && Evigilo.sendEvent) {
           Evigilo.sendEvent(eventObj
           ,defer.resolve, defer.reject);
         }
+```
+
+
+
+### Evigilo.postSettings(settingObj, success, failure)
+
+Change user account settings on the evigilo cloud.
+This function should be called either after a login phase for a non anounimous users. or after the device registration is made which is usually at the beginning, since you need the creation of a new account key in the native code is dependent on this.
+
+Parameter | Type | Default | Description
+--------- | ---- | ------- | -----------
+`settingObj` | `Object` | `{}` | An object describing representing the settings which we want to activate on the server.
+`success` | `function` | | a success callback for the plugin in case the event was succesfully dispatched.
+`failure` | `function` | | a failure callback for the plugin in case of native side error.
+
+
+#### settingObj
+
+Attribute | Type | Default | Description
+--------- | ---- | ------- | -----------
+`vendors.mobile` | `string` | | Optional. set the account user mobile number which can also be used for SMS dispatching if vendors.isSendSms is set to true
+`vendors.isSendSms` | `string` | | Optional. set the account user to recieve sms emergency notifications. if supported for the customer.
+`vendors.phone` | `string` | | Optional. set the account user land line phone number which can also be used for IVR based notifications if vendors.isSendIvr is set to true
+`vendors.isSendIvr` | `string` | | Optional. set the account user to recieve IVR based notifications if supported for the customer.
+`vendors.email` | `string` | | Optional. set the account user email address which can also be used for email based notifications if vendors.isSendEmail is set to true
+`vendors.isSendEmail` | `string` | | Optional. set the account user to recieve email based notifications if supported for the customer.
+`name` | `string` | | Optional. The user name
+`language` | `string` | | Optional. The locale for the user which will also be the language that a message will be sent from the server. the supported languages are available via Content recieved from url created from getContent.(content id : 'LANGUAGES')
+`segments` | `array` | | Optional. The registration area codes that the user want to recieve notifications which are in their geo location.
+`relations` | `array` | | Optional. The relation group codes that the user want to recieve notifications which are in sent to them.
+
+
+
+##### Example
+
+```javascript
+if(Evigilo && Evigilo.postSettings) {
+                    var settings = {};
+                    settings.name = 'eVigilo user';
+                    settings.vendors = {mobile : '031111111'};
+                    settings.language = en_US; // locale
+                    Evigilo.postSettings(settings,function(){
+                        console.log("Succeed updating server");
+                    },function(e){
+                      console.log("Failed updating server");                     
+                    });
+          }
 ```
