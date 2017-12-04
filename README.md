@@ -58,9 +58,16 @@ Parameter | Type | Default | Description
 
 Attribute | Type | Default | Description
 --------- | ---- | ------- | -----------
-`android.smallIcon` | `string` | | Optional. The name of a drawable resource to use as the small-icon. The name should not include the extension.
-`android.iconColor` | `string` | | Optional. Sets the background color of the small icon on Android 5.0 and greater. [Supported Formats](http://developer.android.com/reference/android/graphics/Color.html#parseColor(java.lang.String))
-`android.largeIcon` | `string` | | Optional. The name of a drawable resource to use as the large-icon and will be shown inthe alert popup. The name should not include the extension.
+`phone` | `string` | | Optional. The reporter mobile phone
+`name` | `string` | | Optional. The reporter name
+`message` | `string` | | Optional. The message text that we want to be sent.
+`photoPath` | `string` | | Optional. The photo native path to be sent to the server. usually this comes from the cordova-plugin-camera result.
+`soundPath` | `string` | | Optional. The media native path to be sent to the server. usually this comes from the cordova-plugin-media result.
+`reportType` | `int` | | required. The severity of the event where : 1 is for panic , 2 is observation
+`event` | `int` | | Optional. The event group id which is ussually recieved as a content from the server.
+`subEvent` | `int` | | required. The sub type id which is ussually recieved as a content from the server.
+`messageId` | `int` | | Optional. a push message id to link with the emergency event whicj is reported.
+
 
 
 ##### Example
