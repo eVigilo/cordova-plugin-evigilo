@@ -7,7 +7,7 @@ To install from the command line you need to also add the customer unique instan
 ```
 cordova plugin add https://github.com/evigilo/cordova-plugin-evigilo --variable INSTANCE=instanceName 
 ```
-###On premise installation
+### On premise installation
 If the plugin needs to communicate with an on premise server with custom url 
 then use : 
 
