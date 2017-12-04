@@ -1,5 +1,5 @@
 {
-  "name": "cordova-plugin-evigilo-api",
+  "name": "cordova-plugin-evigilo",
   "description": "Cross-platform plugin for Cordova  to easily use evigilo's api. Available for Android and iOS.",
   "version": "0.1.11",
   "cordova": {
